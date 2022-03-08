@@ -2,6 +2,9 @@
 
 #Gets inputted name's initials
 
+from os import dup
+
+
 name = input("What is your first and last name?: ")
 initials = ""
 for char in name:
@@ -12,12 +15,20 @@ print(initials)
 
 #Function that checks and validates the password
 def main(min_len: int, max_len: int):
+    duplicates = []
     special_char = "!@#$%^"
     #Check password input and return password string.
     while True:
         password = input("What is your desired password? ")
         
         # -------------------- Check for Bad Inputs -------------------- #
+        # Check for characters that repeat more than once and count how many times they appear
+        for char in password:
+            if password.count(char) > 1:
+                duplicates.append(char)
+        print(f"The characters {char} appears {len(duplicates)} times")
+        main(8,12)
+
         # Check for input.
         if not password:
             print("Please enter a password.\n")
@@ -25,7 +36,7 @@ def main(min_len: int, max_len: int):
         
         # Check if initials are in password
         elif initials.lower() in password or initials.upper() in password:
-            print("Cannot have initials in password")
+            print("Password must not contain user initials")
 
         # Check for weak password.
         elif "pass" in password or "Pass" in password:

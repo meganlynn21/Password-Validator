@@ -1,18 +1,20 @@
 # Password Validator
-
-#Gets inputted name's initials
-
-from os import dup
-
-
 name = input("What is your first and last name?: ")
-initials = ""
+name = ''.join(name.split())
+myList =[]
+#Gets inputted name's initials
 for char in name:
+    initials = ""
 #check uppercase characters
     if char.isupper():
         initials += char
-print(initials)
-
+        myList.append(initials)
+        storedInitials = myList
+        joinInitials = ''.join(storedInitials)
+    if len(myList) == 2:
+        print(joinInitials)
+        break
+        
 #Function that checks and validates the password
 def main(min_len: int, max_len: int):
     duplicates = []
@@ -22,6 +24,7 @@ def main(min_len: int, max_len: int):
         password = input("What is your desired password? ")
         
         # -------------------- Check for Bad Inputs -------------------- #
+        
         # Check for characters that repeat more than once and count how many times they appear
         for char in password:
             if password.count(char) > 1:
@@ -73,6 +76,5 @@ def main(min_len: int, max_len: int):
 
 
 main(8,12)
-
 
 

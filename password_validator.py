@@ -1,25 +1,11 @@
 # Password Validator
-name = input("What is your first and last name?: ")
-name = ''.join(name.split())
-myList =[]
-#Gets inputted name's initials
-for char in name:
-    initials = ""
-#check uppercase characters
-    if char.isupper():
-        initials += char
-        myList.append(initials)
-        storedInitials = myList
-        joinInitials = ''.join(storedInitials)
-    if len(myList) == 2:
-        print(joinInitials)
-        break
-        
+
 #Function that checks and validates the password
 def main(min_len: int, max_len: int):
     duplicates = []
     special_char = "!@#$%^"
     #Check password input and return password string.
+    validPassword = False
     while True:
         password = input("What is your desired password? ")
         
@@ -29,8 +15,8 @@ def main(min_len: int, max_len: int):
         for char in password:
             if password.count(char) > 1:
                 duplicates.append(char)
-        print(f"The characters {char} appears {len(duplicates)} times")
-        main(8,12)
+                print(f"The characters {char} appears {len(duplicates)} times")
+                validPassword = True
 
         # Check for input.
         if not password:
@@ -70,11 +56,38 @@ def main(min_len: int, max_len: int):
             print("Password must contain a special character")
 
         # -------------------- End of Bad Inputs -------------------- #
-        
+            
         else:
             return password
 
+validName = False
+# Ask for first and last name input
+while True:
+    name = input("What is your first and last name?: ")
 
-main(8,12)
+# Check if digits are in name 
+    if any(letter.isdigit() for letter in name):
+        print("Invalid Input")
+        validName = True
+# Check for uppercase letters       
+    elif not any(letter.isupper() for letter in name):
+        print("Please enter capitals for first letter of first and last name")
+        validName = True
+           
+    name = ''.join(name.split())
+    myList =[]
+#Gets inputted name's initials
+    for char in name:
+        initials = ""
+#check uppercase characters
+        if char.isupper():
+            initials += char
+            myList.append(initials)
+            storedInitials = myList
+            joinInitials = ''.join(storedInitials)
+        if len(myList) == 2:
+            print(joinInitials)
+            main(8,12)
+
 
 
